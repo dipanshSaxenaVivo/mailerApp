@@ -1,4 +1,5 @@
 const User = require("../model/userSchema");
+const mongo = require('mongodb')
 
 const registerUser = async (req, res, next) => {
   const { name, email, message } = req.body;
@@ -21,4 +22,24 @@ const registerUser = async (req, res, next) => {
   return null;
 };
 
-module.exports = {registerUser};
+const removeUser = async(req,res,next)=>{
+    const {id,email} = req.body
+    if(id){
+        try {
+          await  User.deleteOne({_id:new mongo.ObjectId(id)})
+            return res.status(200).send('deleted successfully')
+        } catch (error) {
+            return res.status(400).send({error:error})
+        }
+    }
+    if(email){
+        try {
+          await  User.deleteOne({email})
+            return res.status(200).send('deleted successfully')
+        } catch (error) {
+            return res.status(400).send({error:error})
+        }
+    }
+    return null
+}
+module.exports = {registerUser,removeUser};

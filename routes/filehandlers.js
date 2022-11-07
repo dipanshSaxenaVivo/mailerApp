@@ -1,11 +1,5 @@
 var express = require("express");
-const deleteFile = require("../controllers/deleteFile");
-const copyFileReq = require("../controllers/copyFile");
-const createFile = require("../controllers/createFile");
-const moveFile = require("../controllers/moveFile");
-const readFileReq = require("../controllers/readFile");
-const renameFile = require("../controllers/renameFile");
-const writeFile = require("../controllers/writeFile");
+const { copyFileReq, createFile, deleteFile, moveFile, readFileReq, renameFile, writeFile } = require("../controllers/fileHandlerControllers");
 var router = express.Router();
 
 /* GET home page. */
