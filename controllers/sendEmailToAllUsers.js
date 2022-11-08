@@ -27,9 +27,9 @@ const logingoogle = async () => {
 const sendEmailToAllUsers = async (req, res, next) => {
   const allUsers = await User.find().select("email");
   const userObjects = Object.values(allUsers);
+  const smtpTransport = await logingoogle();
 
   userObjects.map(async (user) => {
-    const smtpTransport = await logingoogle();
     const mail = {
       from: `yoursTrouly <${process.env.GMAIL_ID}>`,
       to: user.email,
